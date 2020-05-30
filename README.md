@@ -1,10 +1,10 @@
-# logstash+elasticsearch+kinaba分布式集群日志收集系统
+# logstash+elasticsearch+kibana分布式集群日志收集系统
 
 logstash+elasticsearch+kinaba分布式集群日志收集系统，超级详细！最快上手！
 
 | 名称          | 版本       |
 | ------------- | ---------- |
-| kinaba        | 5.6.8      |
+| kibana        | 5.6.8      |
 | elasticsearch | 5.6.8      |
 | kafka         | 2.11-1.0.0 |
 | logstash      | 6.2.3      |
@@ -112,7 +112,7 @@ logstash+elasticsearch+kinaba分布式集群日志收集系统，超级详细！
 
 - 启动项目，此时应该可以看到kafka已经打印出来了启动日志！
 
-### 安装logstash，elasticsearch，kinaba
+### 安装logstash，elasticsearch，kibana
 
 - 网上教程极多，就不介绍如何安装qaq
 
