@@ -135,7 +135,7 @@ logstash+elasticsearch+kibana分布式集群日志收集系统，超级详细！
   ```
   input {
       kafka {
-          bootstrap_servers => ["118.31.11.163:9092"]
+          bootstrap_servers => ["你的kafka服务器地址:9092"]
           topics => ["serverlogs"]
   	type => "log4j-json"
       }
@@ -145,7 +145,7 @@ logstash+elasticsearch+kibana分布式集群日志收集系统，超级详细！
         codec => rubydebug
       }
       elasticsearch {
-          hosts => ["118.31.11.163:9200"]
+          hosts => ["你的elasticsearch服务器地址:9200"]
           index => "applogstash-%{+YYYY.MM.dd.HH}"
       }
   }
@@ -175,7 +175,7 @@ Management里填写 applogstash-* 就可以看到日志！（不要勾选@timest
   ```
   input {
       kafka {
-          bootstrap_servers => ["118.31.11.163:9092"]
+          bootstrap_servers => ["你的kafka服务器地址:9092"]
           topics => ["serverlogs"]
           type => "json"
       }
@@ -193,7 +193,7 @@ Management里填写 applogstash-* 就可以看到日志！（不要勾选@timest
         codec => rubydebug
       }
       elasticsearch {
-          hosts => ["118.31.11.163:9200"]
+          hosts => ["你的elasticsearch服务器地址:9200"]
           index => "applogstash-%{+YYYY.MM.dd.HH}"
       }
   }
@@ -204,6 +204,6 @@ Management里填写 applogstash-* 就可以看到日志！（不要勾选@timest
   ```xml
           <Kafka name="Kafka" topic="serverlogs">
               <PatternLayout pattern="%d{yyyy-MM-dd HH:mm:ss.SSS}[%t] %-5level [%l] - %msg"/>
-              <Property name="bootstrap.servers">118.31.11.163:9092</Property>
+              <Property name="bootstrap.servers">你的kafka服务器地址:9092</Property>
           </Kafka>
   ```
