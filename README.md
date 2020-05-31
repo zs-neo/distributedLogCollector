@@ -1,6 +1,6 @@
 # logstash+elasticsearch+kibana分布式集群日志收集系统
 
-logstash+elasticsearch+kinaba分布式集群日志收集系统，超级详细！最快上手！
+logstash+elasticsearch+kibana分布式集群日志收集系统，超级详细！最快上手！
 
 | 名称          | 版本       |
 | ------------- | ---------- |
@@ -167,3 +167,43 @@ Management里填写 applogstash-* 就可以看到日志！（不要勾选@timest
 - 能不能把nginx日志配置到里面，也不难，读取file就可以
 - 集群化，其实就是几个zk相互注册，几个kafka提供消息服务，配置好ip和参数就可以
 - 集成到已有项目，尽量无侵入
+
+### 更新
+
+- logstash配置文件
+
+  ```
+  input {
+      kafka {
+          bootstrap_servers => ["118.31.11.163:9092"]
+          topics => ["serverlogs"]
+          type => "json"
+      }
+  }
+  filter {
+      grok {
+          patterns_dir => ["/root/logstash-6.2.3/patterns"]
+          match => {
+              "message" => "%{TIMESTAMP_ISO8601:timestamp}\[%{MY_THREAD:threadname}\]\s%{LOGLEVEL:loglevel}\s\s\[%{MY_METHOD:method}\]\s-\s%{MY_MSG:information}"
+          }
+      }
+  }
+  output {
+      stdout {
+        codec => rubydebug
+      }
+      elasticsearch {
+          hosts => ["118.31.11.163:9200"]
+          index => "applogstash-%{+YYYY.MM.dd.HH}"
+      }
+  }
+  ```
+
+- log4j2配置
+
+  ```xml
+          <Kafka name="Kafka" topic="serverlogs">
+              <PatternLayout pattern="%d{yyyy-MM-dd HH:mm:ss.SSS}[%t] %-5level [%l] - %msg"/>
+              <Property name="bootstrap.servers">118.31.11.163:9092</Property>
+          </Kafka>
+  ```

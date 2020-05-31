@@ -23,7 +23,9 @@ public class DemoController {
 	
 	@RequestMapping("/hello")
 	public void hello() throws Exception {
+		logger.debug("invoke hello!");
 		logger.info("invoke hello!");
+		logger.warn("invoke hello!");
 		throw new Exception("test invoke hello occur exception");
 	}
 	
